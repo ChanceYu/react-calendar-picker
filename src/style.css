@@ -1,0 +1,132 @@
+.calendar-picker-box {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 6666;
+}
+
+.calendar-picker-mask {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1009;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.calendar-picker.shown .calendar-picker-mask {
+    opacity: 1;
+    animation: fadeIn .2s 1;
+    -webkit-animation: fadeIn .2s 1;
+}
+
+.calendar-picker-header {
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    color: #999;
+    font-size: 14px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.calendar-picker-header .title-date {
+    -webkit-box-flex: 8;
+    -webkit-flex: 8;
+    -ms-flex: 8;
+    flex: 8;
+    position: relative;
+}
+
+.calendar-picker-header .title-date-today {
+    color: #32b16c;
+    font-size: 10px;
+    position: absolute;
+    right: 10px;
+}
+
+.calendar-picker-header .arrow {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.calendar-picker-week {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.calendar-picker-week .week-cell,
+.calendar-picker-month .date-cell {
+    display: inline-block;
+    width: 14vw;
+    text-align: center;
+    font-size: 12px;
+}
+
+.calendar-picker-week .week-cell {
+    height: 30px;
+    line-height: 30px;
+    color: #999;
+}
+
+.calendar-picker-month .date-cell {
+    height: 14vw;
+    line-height: 14vw;
+    border-radius: 50%;
+}
+
+.calendar-picker-month .date-cell.disabled {
+    color: #ddd;
+}
+
+.calendar-picker-month .date-cell.prev-month-day,
+.calendar-picker-month .date-cell.next-month-day {
+    visibility: hidden;
+}
+
+.calendar-picker-month {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.calendar-picker-month .date-cell.active {
+    background: #32b16c;
+    color: #fff;
+}
