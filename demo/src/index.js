@@ -9,9 +9,12 @@ class Page extends Component {
   }
   render() {
     return (
-      <div className="center">
-
-        <CalendarPicker startDate="2017-07-17" endDate="2018-08-18" onChange={this.onChangeDate} />
+      <div>
+        <CalendarPicker
+          startDate="2017-07-17"
+          endDate="2018-08-18"
+          onChange={this.onChangeDate}
+        />
       </div>
     );
   }
