@@ -1,8 +1,12 @@
 # react-calendar-picker
 基于React封装的Calendar日历组件
 
+
 ### 预览
-![react-calendar-picker](./preview/preview@2x.png)
+<div align="center">
+  <img width="360" src="preview/preview@2x.png" alt="react-calendar-picker" />
+</div>
+
 
 ### 安装
 
@@ -10,13 +14,13 @@
 npm install
 ```
 
+
 ### 使用
 
 ```javascript
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CalendarPicker from '../../src/CalendarPicker';
-
 
 class Page extends Component {
   onChangeDate(date){

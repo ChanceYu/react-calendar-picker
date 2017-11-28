@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CalendarPicker from '../../src/CalendarPicker';
 
-
 class Page extends Component {
   onChangeDate(date){
     console.log(date)
