@@ -1,7 +1,5 @@
 # react-calendar-picker
-
-基于React封装的Calendar日历选择组件
-
+基于React封装的Calendar日历组件
 ## 安装
 
 ```bash
