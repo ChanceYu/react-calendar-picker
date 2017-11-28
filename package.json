@@ -44,9 +44,6 @@
     "webpack-umd-external": "^1.0.2"
   },
   "scripts": {
-    "build": "npm run build-dev && npm run build-demo && npm run build-babel",
-    "build-dev": "webpack --watch --config webpack.config --colors",
-    "build-demo": "browserify ./demo/index.js -t [ babelify --presets [ es2015 stage-0 react ] --plugins [ transform-object-assign ] ] | uglifyjs -cm > ./demo/bundle.min.js",
-    "build-babel": "babel ./src/CalendarPicker.js --out-file index.js"
+    "build": "webpack --watch --config webpack.config --colors"
   }
 }

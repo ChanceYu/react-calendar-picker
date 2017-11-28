@@ -28,6 +28,7 @@ class CalendarPicker extends React.Component{
         });
     }
     getTotalMonths(){
+        console.log();
         let state = this.state;
 
         let oMonth = new MonthDate({
@@ -40,6 +41,7 @@ class CalendarPicker extends React.Component{
         this.setState({
             months: months
         });
+        console.log(months);
     }
     onClickDateCell(item){
         if(item.disabled) return;
