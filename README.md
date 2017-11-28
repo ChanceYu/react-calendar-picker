@@ -3,8 +3,8 @@
 
 
 ### 预览
-<div align="center">
-  <img width="360" src="preview/preview@2x.png" alt="react-calendar-picker" />
+<div>
+  <img width="320" src="preview/preview@2x.png" alt="react-calendar-picker" />
 </div>
 
 
