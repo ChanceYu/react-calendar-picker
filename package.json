@@ -16,11 +16,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "calendar-calculator": "^1.0.7",
+    "moment": "^2.15.0",
     "object-assign": "^4.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "moment": "^2.15.0",
     "webpack": "^2.7.0"
   },
   "devDependencies": {
