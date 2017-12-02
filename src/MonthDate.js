@@ -6,161 +6,200 @@ import moment from 'moment';
 class SingleMonth{
   static defaultOptions = {
     startDate: '',
-    endDate: '',
-    format: 'YYYY-MM-DD'
+    endDate: ''
   }
   constructor(options) {
     this.options = Object.assign({}, SingleMonth.defaultOptions, options);
 
-    this.today = moment().format(this.options.format);
+    this.init();
   }
-  getCurrentMonthDisableDateCell(cells, type /* prev | next */) {
-    let startDate = this.options.startDate;
-    let endDate = this.options.endDate;
-    let format = this.options.format;
+  init(){
+    let oStartDate = moment(this.options.startDate);
+    let oEndDate = moment(this.options.endDate);
+
+    let oFirstDate = oStartDate.clone().startOf('month');
+    let oLastDate = oStartDate.clone().endOf('month');
+
+    let oFirstWeekDate = oFirstDate.clone().startOf('week');
+    let oPrevMonthLastDate = oFirstWeekDate.clone().endOf('month');
+
+    let oLastWeekDate = oLastDate.clone().endOf('week');
+    let oNextMonthFirstDate = oLastWeekDate.clone().startOf('month');
+
+    if(!oFirstDate.isSame(oFirstWeekDate)){
+      this.existPrevMonthDays = true;
+    }
     
-    let prevJudge = () => {
-      return startDate !== moment(startDate).startOf('month').format(format);
-    };
-    let nextJudge = () => {
-      return endDate !== moment(endDate).endOf('month').format(format)
-    };
-
-    if ((type === 'prev' && prevJudge()) || (type === 'next' && nextJudge())) {
-      let disabledDays = 0;
-      if (type === 'prev') {
-        disabledDays = moment(startDate).get('date') - moment(startDate).startOf('month').get('date');
-      } else {
-        disabledDays = moment(endDate).endOf('month').get('date') - moment(endDate).get('date');
-      }
-
-      for (let i = 1; i <= disabledDays; i++) {
-        let method = '';
-        let cellDate;
-
-        if (type === 'prev') {
-          method = 'unshift';
-          cellDate = moment(startDate).subtract(i, 'days');
-        } else {
-          method = 'push';
-          cellDate = moment(endDate).subtract(-i, 'days');
-        }
-
-        cells[method]({
-          date: cellDate.format(format),
-          week: cellDate.weekday(),
-          day: cellDate.format('DD'),
-          disabled: true
-        });
-      }
+    if(!oFirstDate.isSame(oStartDate)){
+      this.existStartDisableDays = true;
     }
-  }
-  getEdgeMonthDateCell(cells, type /* prev | next */) {
-    let startDate = this.options.startDate;
-    let endDate = this.options.endDate;
-    let format = this.options.format;
-
-    let weekOfEdgeDate;
-    if (type === 'prev') {
-      weekOfEdgeDate = moment(startDate).startOf('month').weekday();
-    } else {
-      weekOfEdgeDate = moment(endDate).endOf('month').weekday();
+        
+    if(!oLastDate.isSame(oEndDate)){
+      this.existEndDisableDays = true;
     }
 
-    if ((type === 'prev' && weekOfEdgeDate !== 1) || (type === 'next' && weekOfEdgeDate !== 0)) {
-      if (type === 'prev' && weekOfEdgeDate === 0) {
-        weekOfEdgeDate = 7;
-      } else if (type === 'next') {
-        weekOfEdgeDate = 8 - weekOfEdgeDate;
-      }
-
-      for (let i = 1; i < weekOfEdgeDate; i++) {
-        let method = '';
-        let cellDate;
-        let data = {
-          disabled: true
-        };
-
-        if (type === 'prev') {
-          data.isPrevMonth = true;
-          method = 'unshift';
-          cellDate = moment(startDate).startOf('month').subtract(i, 'days');
-        } else {
-          data.isNextMonth = true;
-          method = 'push';
-          cellDate = moment(endDate).endOf('month').subtract(-i, 'days');
-        }
-
-        data.date = cellDate.format(format);
-        data.week = cellDate.weekday();
-        data.day = cellDate.format('DD');
-
-        cells[method](data);
-      }
-    }
-  }
-  getCurrentMonthClickableDateCell(cells) {
-    let startDate = this.options.startDate;
-    let endDate = this.options.endDate;
-    let format = this.options.format;
-    let today = this.today;
-    let date, itemDate;
-
-    if (startDate === endDate) {
-      // when startDate == endDate ( only one day )
-      let singleDate = moment(endDate);
-
-      date = singleDate.format(format);
-      itemDate = {
-        date: date,
-        week: singleDate.weekday(),
-        day: singleDate.format('DD')
-      };
-
-      if (date === today) this.todayDate = Object.assign({}, itemDate);
-
-      cells.push(itemDate);
+    if(!oLastDate.isSame(oLastWeekDate)){
+      this.existNextMonthDays = true;
     }
 
-    while (startDate !== endDate) {
-      let cellDate = moment(startDate);
+    this.startDate = oStartDate.date();
+    this.endDate = oEndDate.date();
+    
+    this.firstDate = oFirstDate.date();
+    this.lastDate = oLastDate.date();
+    
+    this.prevMonthFirstDate = oFirstWeekDate.date();
+    this.prevMonthLastDate = oPrevMonthLastDate.date();
 
-      date = cellDate.format(format);
-      itemDate = {
-        date: date,
-        week: cellDate.weekday(),
-        day: cellDate.format('DD')
-      };
+    this.nextMonthLastDate = oLastWeekDate.date();
 
-      if (date === today) this.todayDate = Object.assign({}, itemDate);
-
-      cells.push(itemDate);
-
-      startDate = cellDate.subtract(-1, 'days').format(format);
-
-      if (startDate === endDate) {
-        cellDate = moment(endDate);
-        date = cellDate.format(format);
-        itemDate = {
-          date: date,
-          week: cellDate.weekday(),
-          day: cellDate.format('DD')
-        };
-
-        if (date === today) this.todayDate = Object.assign({}, itemDate);
-
-        cells.push(itemDate);
-      }
-    }
+    this.YYYY = oStartDate.format('YYYY');
+    this.MM = oStartDate.format('MM');
+    this.prevMM = oFirstWeekDate.format('MM');
+    this.nextMM = oLastWeekDate.format('MM');
+    this.todayDate = moment().format('YYYY-MM-DD');
   }
   getTotalDateCell() {
     let cells = [];
 
-    this.getCurrentMonthDisableDateCell(cells, 'prev');
-    this.getEdgeMonthDateCell(cells, 'prev');
-    this.getCurrentMonthClickableDateCell(cells);
-    this.getCurrentMonthDisableDateCell(cells, 'next');
-    this.getEdgeMonthDateCell(cells, 'next');
+    let weekTitle = '日一二三四五六'.split('');
+    let weekIndex = 0;
+    let i = 0;
+    
+    // prev month disabled days
+    if(this.existPrevMonthDays){
+      for(i = this.prevMonthFirstDate; i <= this.prevMonthLastDate; i++){
+        let day = toDouble(i);
+        let date = this.YYYY + '-' + this.prevMM + '-' + day;
+        let week = weekTitle[weekIndex];
+        let item = {
+          date: date,
+          weekday: weekIndex,
+          week: week,
+          day: day,
+          isPrevMonth: true,
+          disabled: true
+        };
+
+        if(date === this.todayDate){
+          this.existToday = true;
+          item.isToday = true;
+        }
+
+        cells.push(item);
+
+        weekIndex++;
+
+        if(weekIndex === 7) weekIndex = 0;
+      }
+    }
+
+    // current month disabled days `start`
+    if(this.existStartDisableDays){
+      for(i = 1; i < this.startDate; i++){
+        let day = toDouble(i);
+        let date = this.YYYY + '-' + this.MM + '-' + day;
+        let week = weekTitle[weekIndex];
+        let item = {
+          date: date,
+          weekday: weekIndex,
+          week: week,
+          day: day,
+          disabled: true
+        }
+        
+        if(date === this.todayDate){
+          this.existToday = true;
+          item.isToday = true;
+        }
+
+        cells.push(item);
+
+        weekIndex++;
+
+        if(weekIndex === 7) weekIndex = 0;
+      }
+    }
+
+    // current month enabled days
+    for(i = this.startDate; i <= this.endDate; i++){
+      let day = toDouble(i);
+      let date = this.YYYY + '-' + this.MM + '-' + day;
+      let week = weekTitle[weekIndex];
+      let item = {
+        date: date,
+        weekday: weekIndex,
+        week: week,
+        day: day,
+        enabled: true
+      };
+      
+      if(date === this.todayDate){
+        this.existToday = true;
+        item.isToday = true;
+      }
+
+      cells.push(item);
+
+      weekIndex++;
+
+      if(weekIndex === 7) weekIndex = 0;
+    }
+
+    // current month disabled days `end`
+    if(this.existEndDisableDays){
+      for(i = this.endDate + 1; i <= this.lastDate; i++){
+        let day = toDouble(i);
+        let date = this.YYYY + '-' + this.MM + '-' + day;
+        let week = weekTitle[weekIndex];
+        let item = {
+          date: date,
+          weekday: weekIndex,
+          week: week,
+          day: day,
+          disabled: true
+        };
+        
+        if(date === this.todayDate){
+          this.existToday = true;
+          item.isToday = true;
+        }
+
+        cells.push(item);
+
+        weekIndex++;
+
+        if(weekIndex === 7) weekIndex = 0;
+      }
+    }
+
+    // next month disabled days
+    if(this.existNextMonthDays){
+      for(i = 1; i <= this.nextMonthLastDate; i++){
+        let day = toDouble(i);
+        let date = this.YYYY + '-' + this.nextMM + '-' + day;
+        let week = weekTitle[weekIndex];
+        let item = {
+          date: date,
+          weekday: weekIndex,
+          week: week,
+          day: day,
+          isNextMonth: true,
+          disabled: true
+        };
+        
+        if(date === this.todayDate){
+          this.existToday = true;
+          item.isToday = true;
+        }
+
+        cells.push(item);
+
+        weekIndex++;
+
+        if(weekIndex === 7) weekIndex = 0;
+      }
+    }
 
     return cells;
   }
@@ -183,9 +222,12 @@ class MonthDate {
     let endDate = this.options.endDate;
     let format = this.options.format;
 
+    let oStartDate = moment(startDate);
+    let oEndDate = moment(endDate);
+
     let monthData = [];
-    let startEdgeDateOfStartDate = moment(startDate).startOf('month').format(format);
-    let startEdgeDateOfEndDate = moment(endDate).startOf('month').format(format);
+    let startEdgeDateOfStartDate = oStartDate.clone().startOf('month').format(format);
+    let startEdgeDateOfEndDate = oEndDate.clone().startOf('month').format(format);
 
     let oMonth;
 
@@ -200,8 +242,9 @@ class MonthDate {
         dates: oMonth.getTotalDateCell()
       });
 
-      if (oMonth.todayDate) {
-        this.todayDate = oMonth.todayDate;
+      if (oMonth.existToday) {
+        this.todayDate = {};
+        this.todayDate.date = oMonth.todayDate;
         this.todayDate.monthIndex = monthData.length - 1;
       }
     } else {
@@ -219,8 +262,9 @@ class MonthDate {
           dates: oMonth.getTotalDateCell()
         });
 
-        if (oMonth.todayDate) {
-          this.todayDate = oMonth.todayDate;
+        if (oMonth.existToday) {
+          this.todayDate = {};
+          this.todayDate.date = oMonth.todayDate;
           this.todayDate.monthIndex = monthData.length - 1;
         }
 
@@ -240,8 +284,9 @@ class MonthDate {
         dates: oMonth.getTotalDateCell()
       });
 
-      if (oMonth.todayDate) {
-        this.todayDate = oMonth.todayDate;
+      if (oMonth.existToday) {
+        this.todayDate = {};
+        this.todayDate.date = oMonth.todayDate;
         this.todayDate.monthIndex = monthData.length - 1;
       }
     }
@@ -252,5 +297,9 @@ class MonthDate {
     return this.todayDate;
   }
 };
+
+function toDouble(n){
+  return n < 10 ? '0' + n : (n + '');
+}
 
 module.exports = MonthDate;

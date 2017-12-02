@@ -23,9 +23,7 @@ class CalendarPicker extends React.Component{
         this.getTotalMonths();
     }
     componentWillReceiveProps(nextProps){
-        this.setState(Object.assign({}, CalendarPicker.defaultProps, nextProps), () => {
-            this.getTotalMonths()
-        });
+        this.setState(Object.assign({}, CalendarPicker.defaultProps, nextProps), () => this.getTotalMonths());
     }
     getTotalMonths(){
         let state = this.state;
@@ -36,6 +34,8 @@ class CalendarPicker extends React.Component{
             format: state.format
         });
         let months = oMonth.getTotal();
+
+        console.log(months)
 
         this.setState({
             months: months
@@ -89,13 +89,13 @@ class CalendarPicker extends React.Component{
                         <span className="arrow arrow-right" onClick={this.changeToNextMonth.bind(this)}>&gt;</span>
                     </div>
                     <div className="calendar-picker-week">
+                        <span className="week-cell">日</span>
                         <span className="week-cell">一</span>
                         <span className="week-cell">二</span>
                         <span className="week-cell">三</span>
                         <span className="week-cell">四</span>
                         <span className="week-cell">五</span>
                         <span className="week-cell">六</span>
-                        <span className="week-cell">日</span>
                     </div>
                     <div className="calendar-picker-month">
                         {
