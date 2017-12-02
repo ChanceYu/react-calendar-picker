@@ -1,8 +1,9 @@
 # react-calendar-picker
-基于React封装的Calendar日历组件
 [![Build Status](https://travis-ci.org/ChanceYu/react-calendar-picker.svg?branch=master)](https://travis-ci.org/ChanceYu/react-calendar-picker)
 [![](https://img.shields.io/badge/language-JavaScript-brightgreen.svg)](https://travis-ci.org/ChanceYu/calendar-calculator)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) 
+
+基于React封装的Calendar日历组件
 
 
 ### 预览
