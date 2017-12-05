@@ -3,6 +3,8 @@ import moment from 'moment';
 import MonthCalculator from 'month-calculator';
 import './style.css';
 
+import CalendarPickerWeek from './CalendarPickerWeek';
+
 class CalendarPicker extends React.Component{
     constructor(props) {
         super(props);
@@ -34,10 +36,18 @@ class CalendarPicker extends React.Component{
             format: state.format
         });
         let months = oMonth.getTotal();
+        let enableToday = oMonth.getToday();
+        let options = {};
 
-        this.setState({
-            months: months
-        });
+        options.months = months;
+
+        if (enableToday) {
+            options.showTodayBtn = true;
+            options.todayMonthIndex = enableToday.monthIndex;
+            options.todayDate = enableToday.date;
+        }
+
+        this.setState(options);
     }
     onClickDateCell(item){
         if(item.disabled) return;
@@ -49,6 +59,12 @@ class CalendarPicker extends React.Component{
         if(typeof this.props.onChange === 'function'){
             this.props.onChange(item.date);
         }
+    }
+    changeToToday(){
+        this.setState({
+            currentDate: this.state.todayDate,
+            current: this.state.todayMonthIndex
+        });
     }
     changeToPrevMonth(){
         let current = this.state.current;
@@ -83,18 +99,17 @@ class CalendarPicker extends React.Component{
                 <div className="calendar-picker-box">
                     <div className="calendar-picker-header">
                         <span className="arrow arrow-left" onClick={this.changeToPrevMonth.bind(this)}>&lt;</span>
-                        <span className="title-date">{currentMonth.title}</span>
+                        <span className="title-date">
+                            {currentMonth.title}
+                            {
+                                state.showTodayBtn ?
+                                <small className="title-date-today" onClick={this.changeToToday.bind(this)}>今天</small>
+                                : null
+                            }
+                        </span>
                         <span className="arrow arrow-right" onClick={this.changeToNextMonth.bind(this)}>&gt;</span>
                     </div>
-                    <div className="calendar-picker-week">
-                        <span className="week-cell">日</span>
-                        <span className="week-cell">一</span>
-                        <span className="week-cell">二</span>
-                        <span className="week-cell">三</span>
-                        <span className="week-cell">四</span>
-                        <span className="week-cell">五</span>
-                        <span className="week-cell">六</span>
-                    </div>
+                    <CalendarPickerWeek />
                     <div className="calendar-picker-month">
                         {
                             (currentMonth.dates || []).map((item, idx) => {
