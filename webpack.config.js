@@ -8,9 +8,9 @@ const webpackUMDExternal = require('webpack-umd-external');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, 'demo/src/index.js'),
+  entry: path.join(__dirname, 'example/src/index.js'),
   output: {
-    path: path.join(__dirname, 'demo/dist'),
+    path: path.join(__dirname, 'example/dist'),
     filename: 'bundle.js'
   },
   devtool: "source-map",
@@ -32,14 +32,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'demo/src/index.html')
+      template: path.join(__dirname, 'example/src/index.html')
     })
   ],
   resolve: {
     extensions: ['.js', '.jsx']
   },
   devServer: {
-    contentBase: path.join(__dirname, 'demo/dist'),
+    contentBase: path.join(__dirname, 'example/dist'),
     port: 8000
   }
 };

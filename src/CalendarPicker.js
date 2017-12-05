@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import CalendarCalculator from 'calendar-calculator';
+import MonthCalculator from 'month-calculator';
 import './style.css';
 
 class CalendarPicker extends React.Component{
@@ -28,14 +28,12 @@ class CalendarPicker extends React.Component{
     getTotalMonths(){
         let state = this.state;
 
-        let oMonth = new CalendarCalculator({
+        let oMonth = new MonthCalculator({
             startDate: state.startDate,
             endDate: state.endDate,
             format: state.format
         });
         let months = oMonth.getTotal();
-
-        console.log(months)
 
         this.setState({
             months: months

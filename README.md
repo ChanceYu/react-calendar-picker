@@ -1,9 +1,9 @@
 # react-calendar-picker
 [![Build Status](https://travis-ci.org/ChanceYu/react-calendar-picker.svg?branch=master)](https://travis-ci.org/ChanceYu/react-calendar-picker)
-[![](https://img.shields.io/badge/language-JavaScript-brightgreen.svg)](https://travis-ci.org/ChanceYu/calendar-calculator)
+[![](https://img.shields.io/badge/language-JavaScript-brightgreen.svg)]()
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) 
 
-基于React封装的Calendar日历组件，本人已将日期计算逻辑封装成一个[npm插件](https://www.npmjs.com/package/calendar-calculator)
+基于React封装的Calendar日历组件，本人已将日期计算逻辑封装成一个[npm插件](https://www.npmjs.com/package/month-calculator)
 
 
 ### 预览
