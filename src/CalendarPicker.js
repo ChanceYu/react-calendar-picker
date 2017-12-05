@@ -3,6 +3,7 @@ import moment from 'moment';
 import MonthCalculator from 'month-calculator';
 import './style.css';
 
+import CalendarPickerHeader from './CalendarPickerHeader';
 import CalendarPickerWeek from './CalendarPickerWeek';
 
 class CalendarPicker extends React.Component{
@@ -97,18 +98,13 @@ class CalendarPicker extends React.Component{
         return (
             <div className="calendar-picker static">
                 <div className="calendar-picker-box">
-                    <div className="calendar-picker-header">
-                        <span className="arrow arrow-left" onClick={this.changeToPrevMonth.bind(this)}>&lt;</span>
-                        <span className="title-date">
-                            {currentMonth.title}
-                            {
-                                state.showTodayBtn ?
-                                <small className="title-date-today" onClick={this.changeToToday.bind(this)}>今天</small>
-                                : null
-                            }
-                        </span>
-                        <span className="arrow arrow-right" onClick={this.changeToNextMonth.bind(this)}>&gt;</span>
-                    </div>
+                    <CalendarPickerHeader
+                        title={currentMonth.title}
+                        showTodayBtn={state.showTodayBtn}
+                        changeToToday={this.changeToToday.bind(this)}
+                        changeToPrevMonth={this.changeToPrevMonth.bind(this)}
+                        changeToNextMonth={this.changeToNextMonth.bind(this)}
+                    />
                     <CalendarPickerWeek />
                     <div className="calendar-picker-month">
                         {

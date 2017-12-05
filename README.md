@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-JavaScript-brightgreen.svg)](https://github.com/ChanceYu/react-calendar-picker)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) 
 
-基于React封装的Calendar日历组件，本人已将日期计算逻辑封装成一个[npm插件](https://www.npmjs.com/package/month-calculator)
+基于React封装的Calendar日历组件，支持左右切换，支持切换到今天(在开始日期和结束日期范围之内可用)
 
 
 ### 预览

@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "moment": "^2.15.0",
-    "month-calculator": "^1.0.8",
+    "month-calculator": "^1.0.13",
     "object-assign": "^4.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
