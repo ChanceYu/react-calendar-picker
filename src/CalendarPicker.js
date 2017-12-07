@@ -65,7 +65,7 @@ class CalendarPicker extends React.Component{
                     for(let j = 0; j < datesLen; j++){
                         let dateCell = dates[j];
 
-                        if(dateCell.date === currentDate && !dateCell.disabled){
+                        if(dateCell.date === currentDate && dateCell.enabled){
                             options.current = i;
                             break loopMonth;
                         }
