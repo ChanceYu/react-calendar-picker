@@ -3,23 +3,30 @@
 [![](https://img.shields.io/badge/language-JavaScript-brightgreen.svg)](https://github.com/ChanceYu/react-calendar-picker)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) 
 
-基于React封装的Calendar日历组件，支持左右切换，支持切换到今天(在开始日期和结束日期范围之内可用)
+基于React封装的Calendar日历选择组件
 
 
-### 预览
+## 预览
 <div>
-  <img width="320" src="preview/preview@2x.png" alt="react-calendar-picker" />
+  <img width="320" src="preview/preview.gif" alt="react-calendar-picker" />
 </div>
 
 
-### 安装
+## 特点
+
+- 支持左右切换月份
+- 支持切换到今天（当今天在开始日期和结束日期范围之内可用）
+- 支持多种显示方式展示（如图）
+
+
+## 安装
 
 ```bash
 npm install
 ```
 
 
-### 使用
+## 使用
 
 ```javascript
 import React, { Component } from 'react';
@@ -51,15 +58,17 @@ ReactDOM.render(
 ```
 
 
-### 参数
+## 参数
 
 - `startDate` - 开始日期
 - `endDate` - 结束日期
 - `currentDate` - 默认选择的日期
-- `current` - 默认显示第几个月，从开始日期的月份为第一个月，默认: `0`
+- `current` - 默认显示第几个月，从开始日期的月份为第一个月，默认: `0`，如果有`currentDate`参数，那么按照`currentDate`的月份计算
 - `onChange` - 选中日期的回调函数
+- `show` - 是否显示，默认`false`
+- `mode` - 显示方式，支持`top`、`bottom`、`static`三种方式，分别是固定在顶部、固定在底部、静态展示
 
 
-### License
+## License
 
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) 
