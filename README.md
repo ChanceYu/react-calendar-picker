@@ -66,7 +66,7 @@ ReactDOM.render(
 - `current` - 默认显示第几个月，从开始日期的月份为第一个月，默认: `0`，如果有`currentDate`参数，那么按照`currentDate`的月份计算
 - `onChange` - 选中日期的回调函数
 - `show` - 是否显示，默认`false`
-- `mode` - 显示模式，支持`top`、`bottom`、`static`三种模式，分别是固定在顶部、固定在底部、静态展示
+- `mode` - 显示模式，支持`top`、`bottom`、`static`三种模式，分别是固定在顶部、固定在底部、静态展示，默认`bottom`
 
 
 ## License

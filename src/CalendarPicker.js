@@ -19,7 +19,7 @@ class CalendarPicker extends React.Component{
         endDate: '',
         currentDate: '',
         format: 'YYYY-MM-DD',
-        mode: 'static',
+        mode: 'bottom',
         show: false,
         current: 0,
         onChange: null
@@ -59,10 +59,11 @@ class CalendarPicker extends React.Component{
             loopMonth:
             for(; i < monthsLen; i++){
                 if(months[i].dates){
+                    let j = 0;
                     let dates = months[i].dates;
                     let datesLen = dates.length;
 
-                    for(let j = 0; j < datesLen; j++){
+                    for(; j < datesLen; j++){
                         let dateCell = dates[j];
 
                         if(dateCell.date === currentDate && dateCell.enabled){
@@ -87,7 +88,7 @@ class CalendarPicker extends React.Component{
             }
             
             CalendarPickerBox.className = clsName;
-        });
+        }, 15);
     }
     onClickDateCell(item){
         if(item.disabled) return;
