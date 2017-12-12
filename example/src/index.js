@@ -9,7 +9,7 @@ class Page extends Component {
     super(props);
 
     this.state = {
-      currentDate: moment('2017-08-09').format('YYYY-MM-DD'),
+      currentDate: '2017-08-09',
       showPicker: false,
       mode: 'top'
     }
