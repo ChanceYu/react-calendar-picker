@@ -9,24 +9,35 @@ class CalendarPickerHeader extends React.Component{
         this.state = state;
     }
     static defaultProps = {
-        showTodayBtn: false
+        showTodayBtn: false,
+        showTotal: false
     }
     componentWillReceiveProps(nextProps){
         this.setState(Object.assign({}, CalendarPickerHeader.defaultProps, nextProps));
     }
     render () {
+        let {title, showTodayBtn, showTotal} = this.state;
+        
         return (
             <div className="calendar-picker-header">
-                <span className="arrow arrow-left" onClick={this.props.changeToPrevMonth}>&lt;</span>
+                {
+                    showTotal ? null
+                    :
+                    <span className="arrow arrow-left" onClick={this.props.changeToPrevMonth}>&lt;</span>
+                }
                 <span className="title-date">
-                    {this.state.title}
+                    {title}
                     {
-                        this.state.showTodayBtn ?
+                        showTodayBtn ?
                         <small className="title-date-today" onClick={this.props.changeToToday}>今天</small>
                         : null
                     }
                 </span>
-                <span className="arrow arrow-right" onClick={this.props.changeToNextMonth}>&gt;</span>
+                {
+                    showTotal ? null
+                    :
+                    <span className="arrow arrow-right" onClick={this.props.changeToNextMonth}>&gt;</span>
+                }
             </div>
         )
     }

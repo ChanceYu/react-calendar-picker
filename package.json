@@ -45,6 +45,6 @@
     "webpack-umd-external": "^1.0.2"
   },
   "scripts": {
-    "build": "webpack --watch --config webpack.config --colors"
+    "start": "webpack --watch --config webpack.config --colors"
   }
 }

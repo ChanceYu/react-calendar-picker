@@ -9,6 +9,7 @@
     -webkit-transition: max-height .5s;
     -moz-transition: max-height .5s;
     transition: max-height .5s;
+    overflow: auto;
 }
 
 .calendar-picker.top .calendar-picker-box,
@@ -87,15 +88,17 @@
 }
 
 .calendar-picker-header {
-    text-align: center;
+    width: 100%;
     height: 40px;
     line-height: 40px;
+    text-align: center;
     color: #999;
     font-size: 14px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    background: #fff;
 }
 
 .calendar-picker-header .title-date {
@@ -125,9 +128,25 @@
 }
 
 .calendar-picker-week {
+    width: 100%;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
     text-align: center;
+    background: #fff;
+}
+
+.calendar-picker.show-total .calendar-picker-month-item:first-child .calendar-picker-month-title{
+    border-top: none;
+}
+.calendar-picker.show-total .calendar-picker-header{
+    position: fixed;
+}
+.calendar-picker.show-total .calendar-picker-week{
+    position: fixed;
+    margin-top: 40px;
+}
+.calendar-picker.show-total .calendar-picker-month-box{
+    margin-top: 70px;
 }
 
 .calendar-picker-week .week-cell,
@@ -142,6 +161,12 @@
     height: 30px;
     line-height: 30px;
     color: #999;
+}
+
+.calendar-picker-month-title{
+    color: rgba(0, 0, 0, 0.87);
+    padding: 10px 10px 0 10px;
+    border-top: 1px solid #eee;
 }
 
 .calendar-picker-month .date-cell {

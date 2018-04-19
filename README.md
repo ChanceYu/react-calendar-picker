@@ -10,13 +10,24 @@
 <div>
   <img width="320" src="preview/preview.gif" alt="react-calendar-picker" />
 </div>
+<div>
+  <img width="320" src="preview/preview_bottom.png" alt="react-calendar-picker" />
+  <img width="320" src="preview/preview_top.png" alt="react-calendar-picker" />
+  <img width="320" src="preview/preview_static.png" alt="react-calendar-picker" />
+</div>
+<div>
+  <img width="320" src="preview/preview_total_bottom.png" alt="react-calendar-picker" />
+  <img width="320" src="preview/preview_total_top.png" alt="react-calendar-picker" />
+  <img width="320" src="preview/preview_total_static.png" alt="react-calendar-picker" />
+</div>
 
 
 ## 特点
 
 - 支持左右切换月份
 - 支持切换到今天（当今天在开始日期和结束日期范围之内可用）
-- 支持多种显示模式展示（如图）
+- 支持多种显示模式展示，顶部、底部、静态（如图）
+- 支持单个月份或者多个月份展示
 
 
 ## 安装
@@ -66,6 +77,7 @@ ReactDOM.render(
 - `current` - 默认显示第几个月，从开始日期的月份为第一个月，默认: `0`，如果有`currentDate`参数，那么按照`currentDate`的月份计算
 - `onChange` - 选中日期的回调函数
 - `show` - 是否显示，默认`false`
+- `showTotal` - 是否显示全部月份，默认`false`
 - `mode` - 显示模式，支持`top`、`bottom`、`static`三种模式，分别是固定在顶部、固定在底部、静态展示，默认`bottom`
 
 

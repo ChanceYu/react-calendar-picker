@@ -1,10 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import moment from 'moment';
 import MonthCalculator from 'month-calculator';
+
 import './CalendarPicker.css';
 
 import CalendarPickerHeader from './CalendarPickerHeader';
 import CalendarPickerWeek from './CalendarPickerWeek';
+import CalendarPickerMonth from './CalendarPickerMonth';
 
 class CalendarPicker extends React.Component{
     constructor(props) {
@@ -20,7 +23,9 @@ class CalendarPicker extends React.Component{
         currentDate: '',
         format: 'YYYY-MM-DD',
         mode: 'bottom',
+        months: [],
         show: false,
+        showTotal: false,
         current: 0,
         onChange: null
     }
@@ -90,22 +95,17 @@ class CalendarPicker extends React.Component{
             CalendarPickerBox.className = clsName;
         }, 15);
     }
-    onClickDateCell(item){
-        if(item.disabled) return;
-
+    changeToToday(){
+        let {todayDate, todayMonthIndex, showTotal} = this.state;
+        
         this.setState({
-            currentDate: item.date
+            currentDate: todayDate,
+            current: todayMonthIndex
         });
 
         if(typeof this.props.onChange === 'function'){
-            this.props.onChange(item.date);
+            this.props.onChange(todayDate);
         }
-    }
-    changeToToday(){
-        this.setState({
-            currentDate: this.state.todayDate,
-            current: this.state.todayMonthIndex
-        });
     }
     changeToPrevMonth(){
         let current = this.state.current;
@@ -136,39 +136,41 @@ class CalendarPicker extends React.Component{
         });
     }
     render () {
-        let state = this.state;
-        let months = state.months || [];
-        let currentMonth = months[state.current] || {};
+        let { currentDate, months, current, mode, show, showTotal, showTodayBtn, startDate, endDate } = this.state;
+        let currentMonth = months[current] || {};
         let boxClass = 'calendar-picker';
+        let title = currentMonth.title;
 
-        if(state.mode) boxClass += ' ' + state.mode;
-        if(state.show) boxClass += ' shown';
+        if(mode) boxClass += ' ' + mode;
+        if(show) boxClass += ' shown';
+        if(showTotal){
+            boxClass += ' show-total';
+            title = startDate + ' 至 ' + endDate;
+        }
 
         return (
             <div className={boxClass} ref="CalendarPickerBox">
                 <div className="calendar-picker-box">
+
                     <CalendarPickerHeader
-                        title={currentMonth.title}
-                        showTodayBtn={state.showTodayBtn}
+                        title={title}
+                        showTotal={showTotal}
+                        showTodayBtn={showTodayBtn}
                         changeToToday={this.changeToToday.bind(this)}
                         changeToPrevMonth={this.changeToPrevMonth.bind(this)}
                         changeToNextMonth={this.changeToNextMonth.bind(this)}
                     />
-                    <CalendarPickerWeek />
-                    <div className="calendar-picker-month">
-                        {
-                            (currentMonth.dates || []).map((item, idx) => {
-                                let clsName = 'date-cell';
 
-                                if(item.disabled) clsName += ' disabled';
-                                if(item.isPrevMonth) clsName += ' prev-month-day';
-                                if(item.isNextMonth) clsName += ' next-month-day';
-                                if(item.date == state.currentDate) clsName += ' active';
-                                
-                                return <span onClick={this.onClickDateCell.bind(this, item)} className={clsName} key={Date.now() + idx}>{item.day}</span>
-                            })
-                        }
-                    </div>
+                    <CalendarPickerWeek />
+
+                    <CalendarPickerMonth
+                        months={months}
+                        current={current}
+                        currentDate={currentDate}
+                        showTotal={showTotal}
+                        onChange={this.props.onChange}
+                    />
+
                 </div>
                 <div className="calendar-picker-mask" onClick={this.onClickMask.bind(this)}></div>
             </div>
