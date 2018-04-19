@@ -7,14 +7,15 @@
 
 
 ## 预览
-<div>
-  <img width="320" src="preview/preview.gif" alt="react-calendar-picker" />
-</div>
+
+### 显示单个月份
 <div>
   <img width="30%" src="preview/preview_bottom.png" alt="react-calendar-picker" />
   <img width="30%" src="preview/preview_top.png" alt="react-calendar-picker" />
   <img width="30%" src="preview/preview_static.png" alt="react-calendar-picker" />
 </div>
+
+### 显示全部月份
 <div>
   <img width="30%" src="preview/preview_total_bottom.png" alt="react-calendar-picker" />
   <img width="30%" src="preview/preview_total_top.png" alt="react-calendar-picker" />
