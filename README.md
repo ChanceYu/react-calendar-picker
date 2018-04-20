@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-JavaScript-brightgreen.svg)](https://github.com/ChanceYu/react-calendar-picker)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) 
 
-基于React封装的Calendar日历选择组件，简单易用
+基于React封装的Calendar日历选择组件，简单易用 [查看demo](./example/dist/index.html)
 
 
 ## 预览
@@ -38,7 +38,7 @@ npm install
 ```
 
 
-## 使用
+## 使用 [查看demo](./example/dist/index.html)
 
 ```javascript
 import React, { Component } from 'react';

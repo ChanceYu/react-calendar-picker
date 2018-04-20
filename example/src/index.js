@@ -36,6 +36,10 @@ class Page extends Component {
     })
   }
   render() {
+    if(!/iphone|android/i.test(navigator.userAgent)){
+      return <h1>请使用手机或者浏览器模拟器打开</h1>
+    }
+
     return (
       <div>
         <button type="button" onClick={this.showCalendarPicker.bind(this)}>选择日期，当前: {this.state.currentDate}</button>
