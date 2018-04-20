@@ -154,6 +154,7 @@ class CalendarPicker extends React.Component{
 
                     <CalendarPickerHeader
                         title={title}
+                        edge={current == 0 ? 'first' : current == months.length - 1 ? 'last' : ''}
                         showTotal={showTotal}
                         showTodayBtn={showTodayBtn}
                         changeToToday={this.changeToToday.bind(this)}

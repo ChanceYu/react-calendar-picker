@@ -17596,6 +17596,7 @@ var CalendarPicker = function (_React$Component) {
                     { className: 'calendar-picker-box' },
                     _react2.default.createElement(_CalendarPickerHeader2.default, {
                         title: title,
+                        edge: current == 0 ? 'first' : current == months.length - 1 ? 'last' : '',
                         showTotal: showTotal,
                         showTodayBtn: showTodayBtn,
                         changeToToday: this.changeToToday.bind(this),
@@ -17872,41 +17873,42 @@ var CalendarPickerHeader = function (_React$Component) {
     }
 
     _createClass(CalendarPickerHeader, [{
-        key: "componentWillReceiveProps",
+        key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
             this.setState(Object.assign({}, CalendarPickerHeader.defaultProps, nextProps));
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var _state = this.state,
                 title = _state.title,
                 showTodayBtn = _state.showTodayBtn,
-                showTotal = _state.showTotal;
+                showTotal = _state.showTotal,
+                edge = _state.edge;
 
 
             return _react2.default.createElement(
-                "div",
-                { className: "calendar-picker-header" },
+                'div',
+                { className: 'calendar-picker-header' },
                 showTotal ? null : _react2.default.createElement(
-                    "span",
-                    { className: "arrow arrow-left", onClick: this.props.changeToPrevMonth },
-                    "<"
+                    'span',
+                    { className: 'arrow arrow-left ' + (edge == 'first' ? 'hidden-arrow' : ''), onClick: this.props.changeToPrevMonth },
+                    '<'
                 ),
                 _react2.default.createElement(
-                    "span",
-                    { className: "title-date" },
+                    'span',
+                    { className: 'title-date' },
                     title,
                     showTodayBtn ? _react2.default.createElement(
-                        "small",
-                        { className: "title-date-today", onClick: this.props.changeToToday },
-                        "\u4ECA\u5929"
+                        'small',
+                        { className: 'title-date-today', onClick: this.props.changeToToday },
+                        '\u4ECA\u5929'
                     ) : null
                 ),
                 showTotal ? null : _react2.default.createElement(
-                    "span",
-                    { className: "arrow arrow-right", onClick: this.props.changeToNextMonth },
-                    ">"
+                    'span',
+                    { className: 'arrow arrow-right ' + (edge == 'last' ? 'hidden-arrow' : ''), onClick: this.props.changeToNextMonth },
+                    '>'
                 )
             );
         }
@@ -18158,7 +18160,7 @@ exports = module.exports = __webpack_require__(9)(undefined);
 
 
 // module
-exports.push([module.i, ".calendar-picker{\n    display: none;\n}\n\n.calendar-picker-box {\n    background: #fff;\n    max-height: 0;\n    overflow: hidden;\n    -webkit-transition: max-height .5s;\n    -moz-transition: max-height .5s;\n    transition: max-height .5s;\n    overflow: auto;\n}\n\n.calendar-picker.top .calendar-picker-box,\n.calendar-picker.bottom .calendar-picker-box{\n    z-index: 6666;\n    position: fixed;\n    left: 0;\n    right: 0;\n}\n\n.calendar-picker.top .calendar-picker-box{\n    top: 0\n}\n\n.calendar-picker.bottom .calendar-picker-box{\n    bottom: 0\n}\n\n.calendar-picker.static .calendar-picker-box{\n    -webkit-transition: none;\n    -moz-transition: none;\n    transition: none;\n}\n\n.calendar-picker.static .calendar-picker-mask{\n    display: none\n}\n\n.calendar-picker.shown{\n    display: block;\n}\n\n.calendar-picker.animated .calendar-picker-box{\n    max-height: 500px;\n}\n\n.calendar-picker.animated .calendar-picker-mask {\n    opacity: 1;\n    animation: fadeIn .2s 1;\n    -webkit-animation: fadeIn .2s 1;\n}\n\n.calendar-picker-mask {\n    opacity: 0;\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1009;\n    background: rgba(0, 0, 0, 0.3);\n}\n\n@-webkit-keyframes fadeIn {\n    0% {\n        opacity: 0;\n    }\n    50% {\n        opacity: 0.5;\n    }\n    100% {\n        opacity: 1;\n    }\n}\n\n@keyframes fadeIn {\n    0% {\n        opacity: 0;\n    }\n    50% {\n        opacity: 0.5;\n    }\n    100% {\n        opacity: 1;\n    }\n}\n\n.calendar-picker-header {\n    width: 100%;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #999;\n    font-size: 14px;\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    background: #fff;\n}\n\n.calendar-picker-header .title-date {\n    -webkit-box-flex: 8;\n    -webkit-flex: 8;\n    -ms-flex: 8;\n    flex: 8;\n    position: relative;\n}\n\n.calendar-picker-header .title-date-today {\n    color: #32b16c;\n    font-size: 10px;\n    position: absolute;\n    right: 10px;\n}\n\n.calendar-picker-header .arrow {\n    -webkit-box-flex: 1;\n    -webkit-flex: 1;\n    -ms-flex: 1;\n    flex: 1;\n    width: 40px;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n}\n\n.calendar-picker-week {\n    width: 100%;\n    border-top: 1px solid #eee;\n    border-bottom: 1px solid #eee;\n    text-align: center;\n    background: #fff;\n}\n\n.calendar-picker.show-total .calendar-picker-month-item:first-child .calendar-picker-month-title{\n    border-top: none;\n}\n.calendar-picker.show-total .calendar-picker-header{\n    position: fixed;\n}\n.calendar-picker.show-total .calendar-picker-week{\n    position: fixed;\n    margin-top: 40px;\n}\n.calendar-picker.show-total .calendar-picker-month-box{\n    margin-top: 70px;\n}\n\n.calendar-picker-week .week-cell,\n.calendar-picker-month .date-cell {\n    display: inline-block;\n    width: 14vw;\n    text-align: center;\n    font-size: 12px;\n}\n\n.calendar-picker-week .week-cell {\n    height: 30px;\n    line-height: 30px;\n    color: #999;\n}\n\n.calendar-picker-month-title{\n    color: rgba(0, 0, 0, 0.87);\n    padding: 10px 10px 0 10px;\n    border-top: 1px solid #eee;\n}\n\n.calendar-picker-month .date-cell {\n    height: 14vw;\n    line-height: 14vw;\n    border-radius: 50%;\n}\n\n.calendar-picker-month .date-cell.disabled {\n    color: #ddd;\n}\n\n.calendar-picker-month .date-cell.prev-month-day,\n.calendar-picker-month .date-cell.next-month-day {\n    visibility: hidden;\n}\n\n.calendar-picker-month {\n    padding: 10px 0;\n    text-align: left;\n}\n\n.calendar-picker-month .date-cell.active {\n    background: #32b16c;\n    color: #fff;\n}", ""]);
+exports.push([module.i, ".calendar-picker{\n    display: none;\n}\n\n.calendar-picker-box {\n    background: #fff;\n    max-height: 0;\n    overflow: hidden;\n    -webkit-transition: max-height .5s;\n    -moz-transition: max-height .5s;\n    transition: max-height .5s;\n    overflow: auto;\n}\n\n.calendar-picker.top .calendar-picker-box,\n.calendar-picker.bottom .calendar-picker-box{\n    z-index: 6666;\n    position: fixed;\n    left: 0;\n    right: 0;\n}\n\n.calendar-picker.top .calendar-picker-box{\n    top: 0\n}\n\n.calendar-picker.bottom .calendar-picker-box{\n    bottom: 0\n}\n\n.calendar-picker.static .calendar-picker-box{\n    -webkit-transition: none;\n    -moz-transition: none;\n    transition: none;\n}\n\n.calendar-picker.static .calendar-picker-mask{\n    display: none\n}\n\n.calendar-picker.shown{\n    display: block;\n}\n\n.calendar-picker.animated .calendar-picker-box{\n    max-height: 470px;\n}\n\n.calendar-picker.animated .calendar-picker-mask {\n    opacity: 1;\n    animation: fadeIn .2s 1;\n    -webkit-animation: fadeIn .2s 1;\n}\n\n.calendar-picker-mask {\n    opacity: 0;\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1009;\n    background: rgba(0, 0, 0, 0.3);\n}\n\n@-webkit-keyframes fadeIn {\n    0% {\n        opacity: 0;\n    }\n    50% {\n        opacity: 0.5;\n    }\n    100% {\n        opacity: 1;\n    }\n}\n\n@keyframes fadeIn {\n    0% {\n        opacity: 0;\n    }\n    50% {\n        opacity: 0.5;\n    }\n    100% {\n        opacity: 1;\n    }\n}\n\n.calendar-picker-header {\n    width: 100%;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #999;\n    font-size: 14px;\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    background: #fff;\n}\n\n.calendar-picker-header .title-date {\n    -webkit-box-flex: 8;\n    -webkit-flex: 8;\n    -ms-flex: 8;\n    flex: 8;\n    position: relative;\n}\n\n.calendar-picker-header .title-date-today {\n    color: #32b16c;\n    font-size: 10px;\n    position: absolute;\n    right: 10px;\n}\n\n.calendar-picker-header .arrow {\n    -webkit-box-flex: 1;\n    -webkit-flex: 1;\n    -ms-flex: 1;\n    flex: 1;\n    width: 40px;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n}\n\n.calendar-picker-header .arrow.hidden-arrow{\n    visibility: hidden;\n}\n\n.calendar-picker-week {\n    width: 100%;\n    border-top: 1px solid #eee;\n    border-bottom: 1px solid #eee;\n    text-align: center;\n    background: #fff;\n}\n\n.calendar-picker.show-total .calendar-picker-month-item:first-child .calendar-picker-month-title{\n    border-top: none;\n}\n.calendar-picker.show-total .calendar-picker-header{\n    position: fixed;\n}\n.calendar-picker.show-total .calendar-picker-week{\n    position: fixed;\n    margin-top: 40px;\n}\n.calendar-picker.show-total .calendar-picker-month-box{\n    margin-top: 70px;\n}\n\n.calendar-picker-week .week-cell,\n.calendar-picker-month .date-cell {\n    display: inline-block;\n    width: 14vw;\n    text-align: center;\n    font-size: 12px;\n}\n\n.calendar-picker-week .week-cell {\n    height: 30px;\n    line-height: 30px;\n    color: #999;\n}\n\n.calendar-picker-month-title{\n    color: rgba(0, 0, 0, 0.87);\n    padding: 10px 10px 0 10px;\n    border-top: 1px solid #eee;\n}\n\n.calendar-picker-month .date-cell {\n    height: 14vw;\n    line-height: 14vw;\n    border-radius: 50%;\n}\n\n.calendar-picker-month .date-cell.disabled {\n    color: #ddd;\n}\n\n.calendar-picker-month .date-cell.prev-month-day,\n.calendar-picker-month .date-cell.next-month-day {\n    visibility: hidden;\n}\n\n.calendar-picker-month {\n    padding: 10px 0;\n    text-align: left;\n}\n\n.calendar-picker-month .date-cell.active {\n    background: #32b16c;\n    color: #fff;\n}", ""]);
 
 // exports
 

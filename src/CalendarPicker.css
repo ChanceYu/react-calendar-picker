@@ -43,7 +43,7 @@
 }
 
 .calendar-picker.animated .calendar-picker-box{
-    max-height: 500px;
+    max-height: 470px;
 }
 
 .calendar-picker.animated .calendar-picker-mask {
@@ -125,6 +125,10 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
+}
+
+.calendar-picker-header .arrow.hidden-arrow{
+    visibility: hidden;
 }
 
 .calendar-picker-week {

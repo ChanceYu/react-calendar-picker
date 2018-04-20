@@ -16,14 +16,14 @@ class CalendarPickerHeader extends React.Component{
         this.setState(Object.assign({}, CalendarPickerHeader.defaultProps, nextProps));
     }
     render () {
-        let {title, showTodayBtn, showTotal} = this.state;
+        let {title, showTodayBtn, showTotal, edge} = this.state;
         
         return (
             <div className="calendar-picker-header">
                 {
                     showTotal ? null
                     :
-                    <span className="arrow arrow-left" onClick={this.props.changeToPrevMonth}>&lt;</span>
+                    <span className={'arrow arrow-left ' + (edge == 'first' ? 'hidden-arrow' : '')} onClick={this.props.changeToPrevMonth}>&lt;</span>
                 }
                 <span className="title-date">
                     {title}
@@ -36,7 +36,7 @@ class CalendarPickerHeader extends React.Component{
                 {
                     showTotal ? null
                     :
-                    <span className="arrow arrow-right" onClick={this.props.changeToNextMonth}>&gt;</span>
+                    <span className={'arrow arrow-right ' + (edge == 'last' ? 'hidden-arrow' : '')} onClick={this.props.changeToNextMonth}>&gt;</span>
                 }
             </div>
         )
